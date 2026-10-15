@@ -1,1 +1,1 @@
-# Platzy-API-Manual-Test
+# Platzy-API-Automation-Test
