@@ -1,0 +1,2628 @@
+{
+  "info": {
+    "_postman_id": "fb619f81-45fc-4b2f-9597-5541b80a6b92",
+    "name": "Tugas Harian 10 - API Automation Batch 80",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "10146805"
+  },
+  "item": [
+    {
+      "name": "Get All Data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Untuk menyimpan response ke dalam variable\r",
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1500ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+              "});\r",
+              "\r",
+              "// 3. Cek response body\r",
+              "pm.test(\"Every item has all required fields with correct types\", function () {\r",
+              "    jsonData.forEach(function (item, index) {\r",
+              "        pm.expect(item, `Item at index ${index}`).to.have.property(\"id\");\r",
+              "        pm.expect(item, `Item at index ${index}`).to.have.property(\"name\");\r",
+              "        pm.expect(item, `Item at index ${index}`).to.have.property(\"slug\");\r",
+              "        pm.expect(item, `Item at index ${index}`).to.have.property(\"image\");\r",
+              "        pm.expect(item, `Item at index ${index}`).to.have.property(\"creationAt\");\r",
+              "        pm.expect(item, `Item at index ${index}`).to.have.property(\"updatedAt\");\r",
+              "\r",
+              "        pm.expect(item.id, `id at index ${index}`).to.be.a(\"number\");\r",
+              "        pm.expect(item.name, `name at index ${index}`).to.be.a(\"string\");\r",
+              "        pm.expect(item.slug, `slug at index ${index}`).to.be.a(\"string\");\r",
+              "        pm.expect(item.image, `image at index ${index}`).to.be.a(\"string\");\r",
+              "        pm.expect(item.creationAt, `creationAt at index ${index}`).to.be.a(\"string\");\r",
+              "        pm.expect(item.updatedAt, `updatedAt at index ${index}`).to.be.a(\"string\");\r",
+              "    });\r",
+              "});\r",
+              "\r",
+              "// 4. Cek response valid JSON\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories"
+          ]
+        },
+        "description": "Menampilkan seluruh data categories yang ada."
+      },
+      "response": [
+        {
+          "name": "Get All Data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "5404"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:00:20 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"151c-ws4PXNDuFbKmee4LUTAj1yzMdLQ\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=hpdZJNZ1wf21r5KBM2kXL7%2FxfgXHnMECZGW%2BXCfJkNs%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221620\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=hpdZJNZ1wf21r5KBM2kXL7%2FxfgXHnMECZGW%2BXCfJkNs%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221620\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Updated Category Name\",\n        \"slug\": \"updated-category-name\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:26:13.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Sepatu sandaal\",\n        \"slug\": \"sepatu-sandaal\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:15:23.000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Furniture\",\n        \"slug\": \"furniture\",\n        \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shoes\",\n        \"slug\": \"shoes\",\n        \"image\": \"https://i.imgur.com/qNOjJje.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Baju Wanita\",\n        \"slug\": \"baju-wanita\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"animals\",\n        \"slug\": \"animals\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T02:40:37.000Z\",\n        \"updatedAt\": \"2026-09-12T09:58:14.000Z\"\n    },\n    {\n        \"id\": 18,\n        \"name\": \"coba testing update categori\",\n        \"slug\": \"coba-testing-update-categori\",\n        \"image\": \"https://placehold.co/700x400\",\n        \"creationAt\": \"2026-09-12T02:50:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:23:45.000Z\"\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Loomweave Goods 1789182300\",\n        \"slug\": \"loomweave-goods-1789182300\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:05:02.000Z\",\n        \"updatedAt\": \"2026-09-12T03:05:02.000Z\"\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Loomweave Goods ref182687\",\n        \"slug\": \"loomweave-goods-ref182687\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:11:28.000Z\",\n        \"updatedAt\": \"2026-09-12T03:11:28.000Z\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Books_ad280653d1b3401ca77497dc63bbed14\",\n        \"slug\": \"books-ad280653d1b3401ca77497dc63bbed14\",\n        \"image\": \"https://www.herman.com/\",\n        \"creationAt\": \"2026-09-12T03:48:35.000Z\",\n        \"updatedAt\": \"2026-09-12T03:48:35.000Z\"\n    },\n    {\n        \"id\": 54,\n        \"name\": \"Elektronik Rumah Tangga\",\n        \"slug\": \"elektronik-rumah-tangga\",\n        \"image\": \"https://picsum.photos/640/480\",\n        \"creationAt\": \"2026-09-12T05:30:11.000Z\",\n        \"updatedAt\": \"2026-09-12T05:30:11.000Z\"\n    },\n    {\n        \"id\": 55,\n        \"name\": \"Stationary\",\n        \"slug\": \"stationary\",\n        \"image\": \"https://api.escuelajs.co/api/v1/files/4e2b.png\",\n        \"creationAt\": \"2026-09-12T06:00:34.000Z\",\n        \"updatedAt\": \"2026-09-12T06:35:00.000Z\"\n    },\n    {\n        \"id\": 59,\n        \"name\": \"Campground Compass Ledger - Field Operations\",\n        \"slug\": \"campground-compass-ledger-field-operations\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:28:31.000Z\",\n        \"updatedAt\": \"2026-09-12T06:28:34.000Z\"\n    },\n    {\n        \"id\": 62,\n        \"name\": \"Campground Compass Ledger 8042\",\n        \"slug\": \"campground-compass-ledger-8042\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:43:33.000Z\",\n        \"updatedAt\": \"2026-09-12T06:43:33.000Z\"\n    },\n    {\n        \"id\": 66,\n        \"name\": \"Campground Compass Ledger - Field Operations #66\",\n        \"slug\": \"campground-compass-ledger-field-operations-66\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:06:01.000Z\",\n        \"updatedAt\": \"2026-09-12T07:06:04.000Z\"\n    },\n    {\n        \"id\": 71,\n        \"name\": \"Campground Compass Ledger - Field Operations #71\",\n        \"slug\": \"campground-compass-ledger-field-operations-71\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:12:23.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:26.000Z\"\n    },\n    {\n        \"id\": 72,\n        \"name\": \"Ref Meridian\",\n        \"slug\": \"ref-meridian\",\n        \"image\": \"https://picsum.photos/seed/refmer/600\",\n        \"creationAt\": \"2026-09-12T07:12:51.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:51.000Z\"\n    },\n    {\n        \"id\": 73,\n        \"name\": \"Campground Compass Recon Ledger f5b1 - Field Operations #73\",\n        \"slug\": \"campground-compass-recon-ledger-f5b1-field-operations-73\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:13:41.000Z\",\n        \"updatedAt\": \"2026-09-12T07:13:44.000Z\"\n    },\n    {\n        \"id\": 75,\n        \"name\": \"Campground Compass Ledger - Field Operations #75\",\n        \"slug\": \"campground-compass-ledger-field-operations-75\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:16:33.000Z\",\n        \"updatedAt\": \"2026-09-12T07:17:31.000Z\"\n    },\n    {\n        \"id\": 78,\n        \"name\": \"ProbeCat15783\",\n        \"slug\": \"probecat15783\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:21:21.000Z\",\n        \"updatedAt\": \"2026-09-12T07:21:21.000Z\"\n    },\n    {\n        \"id\": 82,\n        \"name\": \"Make Up Beauty\",\n        \"slug\": \"make-up-beauty\",\n        \"image\": \"https://placeimg.com/640/480/beauty\",\n        \"creationAt\": \"2026-09-12T07:25:52.000Z\",\n        \"updatedAt\": \"2026-09-12T12:44:31.000Z\"\n    },\n    {\n        \"id\": 196,\n        \"name\": \"electronics\",\n        \"slug\": \"electronics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:16:36.000Z\",\n        \"updatedAt\": \"2026-09-12T13:17:16.000Z\"\n    },\n    {\n        \"id\": 198,\n        \"name\": \"QA Test Category\",\n        \"slug\": \"qa-test-category\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:20:58.000Z\",\n        \"updatedAt\": \"2026-09-12T13:20:58.000Z\"\n    },\n    {\n        \"id\": 199,\n        \"name\": \"nics\",\n        \"slug\": \"nics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:30:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:31:57.000Z\"\n    },\n    {\n        \"id\": 200,\n        \"name\": \"Laptop\",\n        \"slug\": \"laptop\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:14.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:14.000Z\"\n    },\n    {\n        \"id\": 201,\n        \"name\": \"Mixer\",\n        \"slug\": \"mixer\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:15.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:15.000Z\"\n    },\n    {\n        \"id\": 202,\n        \"name\": \"Monitor\",\n        \"slug\": \"monitor\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:17.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:17.000Z\"\n    },\n    {\n        \"id\": 205,\n        \"name\": \"Kucing Jambrong\",\n        \"slug\": \"kucing-jambrong\",\n        \"image\": \"https://picsum.photos/1300/1200\",\n        \"creationAt\": \"2026-09-12T13:56:22.000Z\",\n        \"updatedAt\": \"2026-09-12T13:56:22.000Z\"\n    }\n]"
+        },
+        {
+          "name": "Get All Data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "6336"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:26:39 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"18c0-0Vf9Sng6Aq9++nLUCbyG7km9Igc\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=eqzL6CYw%2FJ1sgK2PRT1BdPQA1xyfcunMmeX%2FZ6xaFu4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789223199\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=eqzL6CYw%2FJ1sgK2PRT1BdPQA1xyfcunMmeX%2FZ6xaFu4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789223199\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Updated Category Name\",\n        \"slug\": \"updated-category-name\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:26:13.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Sepatu sandaal\",\n        \"slug\": \"sepatu-sandaal\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:15:23.000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Food & Beverages Update\",\n        \"slug\": \"food-beverages-update\",\n        \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T14:14:12.000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shoes\",\n        \"slug\": \"shoes\",\n        \"image\": \"https://i.imgur.com/qNOjJje.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Baju Wanita\",\n        \"slug\": \"baju-wanita\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"animals\",\n        \"slug\": \"animals\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T02:40:37.000Z\",\n        \"updatedAt\": \"2026-09-12T09:58:14.000Z\"\n    },\n    {\n        \"id\": 18,\n        \"name\": \"coba testing update categori\",\n        \"slug\": \"coba-testing-update-categori\",\n        \"image\": \"https://placehold.co/700x400\",\n        \"creationAt\": \"2026-09-12T02:50:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:23:45.000Z\"\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Loomweave Goods 1789182300\",\n        \"slug\": \"loomweave-goods-1789182300\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:05:02.000Z\",\n        \"updatedAt\": \"2026-09-12T03:05:02.000Z\"\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Loomweave Goods ref182687\",\n        \"slug\": \"loomweave-goods-ref182687\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:11:28.000Z\",\n        \"updatedAt\": \"2026-09-12T03:11:28.000Z\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Books_ad280653d1b3401ca77497dc63bbed14\",\n        \"slug\": \"books-ad280653d1b3401ca77497dc63bbed14\",\n        \"image\": \"https://www.herman.com/\",\n        \"creationAt\": \"2026-09-12T03:48:35.000Z\",\n        \"updatedAt\": \"2026-09-12T03:48:35.000Z\"\n    },\n    {\n        \"id\": 54,\n        \"name\": \"Elektronik Rumah Tangga\",\n        \"slug\": \"elektronik-rumah-tangga\",\n        \"image\": \"https://picsum.photos/640/480\",\n        \"creationAt\": \"2026-09-12T05:30:11.000Z\",\n        \"updatedAt\": \"2026-09-12T05:30:11.000Z\"\n    },\n    {\n        \"id\": 55,\n        \"name\": \"Stationary\",\n        \"slug\": \"stationary\",\n        \"image\": \"https://api.escuelajs.co/api/v1/files/4e2b.png\",\n        \"creationAt\": \"2026-09-12T06:00:34.000Z\",\n        \"updatedAt\": \"2026-09-12T06:35:00.000Z\"\n    },\n    {\n        \"id\": 59,\n        \"name\": \"Campground Compass Ledger - Field Operations\",\n        \"slug\": \"campground-compass-ledger-field-operations\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:28:31.000Z\",\n        \"updatedAt\": \"2026-09-12T06:28:34.000Z\"\n    },\n    {\n        \"id\": 62,\n        \"name\": \"Campground Compass Ledger 8042\",\n        \"slug\": \"campground-compass-ledger-8042\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:43:33.000Z\",\n        \"updatedAt\": \"2026-09-12T06:43:33.000Z\"\n    },\n    {\n        \"id\": 66,\n        \"name\": \"Campground Compass Ledger - Field Operations #66\",\n        \"slug\": \"campground-compass-ledger-field-operations-66\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:06:01.000Z\",\n        \"updatedAt\": \"2026-09-12T07:06:04.000Z\"\n    },\n    {\n        \"id\": 71,\n        \"name\": \"Campground Compass Ledger - Field Operations #71\",\n        \"slug\": \"campground-compass-ledger-field-operations-71\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:12:23.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:26.000Z\"\n    },\n    {\n        \"id\": 72,\n        \"name\": \"Ref Meridian\",\n        \"slug\": \"ref-meridian\",\n        \"image\": \"https://picsum.photos/seed/refmer/600\",\n        \"creationAt\": \"2026-09-12T07:12:51.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:51.000Z\"\n    },\n    {\n        \"id\": 73,\n        \"name\": \"Campground Compass Recon Ledger f5b1 - Field Operations #73\",\n        \"slug\": \"campground-compass-recon-ledger-f5b1-field-operations-73\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:13:41.000Z\",\n        \"updatedAt\": \"2026-09-12T07:13:44.000Z\"\n    },\n    {\n        \"id\": 75,\n        \"name\": \"Campground Compass Ledger - Field Operations #75\",\n        \"slug\": \"campground-compass-ledger-field-operations-75\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:16:33.000Z\",\n        \"updatedAt\": \"2026-09-12T07:17:31.000Z\"\n    },\n    {\n        \"id\": 78,\n        \"name\": \"ProbeCat15783\",\n        \"slug\": \"probecat15783\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:21:21.000Z\",\n        \"updatedAt\": \"2026-09-12T07:21:21.000Z\"\n    },\n    {\n        \"id\": 82,\n        \"name\": \"Make Up Beauty\",\n        \"slug\": \"make-up-beauty\",\n        \"image\": \"https://placeimg.com/640/480/beauty\",\n        \"creationAt\": \"2026-09-12T07:25:52.000Z\",\n        \"updatedAt\": \"2026-09-12T12:44:31.000Z\"\n    },\n    {\n        \"id\": 196,\n        \"name\": \"electronics\",\n        \"slug\": \"electronics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:16:36.000Z\",\n        \"updatedAt\": \"2026-09-12T13:17:16.000Z\"\n    },\n    {\n        \"id\": 198,\n        \"name\": \"QA Test Category\",\n        \"slug\": \"qa-test-category\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:20:58.000Z\",\n        \"updatedAt\": \"2026-09-12T13:20:58.000Z\"\n    },\n    {\n        \"id\": 199,\n        \"name\": \"nics\",\n        \"slug\": \"nics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:30:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:31:57.000Z\"\n    },\n    {\n        \"id\": 200,\n        \"name\": \"Laptop\",\n        \"slug\": \"laptop\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:14.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:14.000Z\"\n    },\n    {\n        \"id\": 201,\n        \"name\": \"Mixer\",\n        \"slug\": \"mixer\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:15.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:15.000Z\"\n    },\n    {\n        \"id\": 202,\n        \"name\": \"Monitor\",\n        \"slug\": \"monitor\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:17.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:17.000Z\"\n    },\n    {\n        \"id\": 205,\n        \"name\": \"Kucing Jambrong\",\n        \"slug\": \"kucing-jambrong\",\n        \"image\": \"https://picsum.photos/1300/1200\",\n        \"creationAt\": \"2026-09-12T13:56:22.000Z\",\n        \"updatedAt\": \"2026-09-12T13:56:22.000Z\"\n    },\n    {\n        \"id\": 206,\n        \"name\": \"QA Automation with Postman\",\n        \"slug\": \"qa-automation-with-postman\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:01:05.000Z\",\n        \"updatedAt\": \"2026-09-12T14:01:05.000Z\"\n    },\n    {\n        \"id\": 207,\n        \"name\": \"Sanbercode 123\",\n        \"slug\": \"sanbercode-123\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:02:34.000Z\",\n        \"updatedAt\": \"2026-09-12T14:02:34.000Z\"\n    },\n    {\n        \"id\": 209,\n        \"name\": \"jemyka123\",\n        \"slug\": \"jemyka123\",\n        \"image\": \"https://placeimg.com/640/480/tech\",\n        \"creationAt\": \"2026-09-12T14:05:28.000Z\",\n        \"updatedAt\": \"2026-09-12T14:05:28.000Z\"\n    },\n    {\n        \"id\": 210,\n        \"name\": \"halo 123\",\n        \"slug\": \"halo-123\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:07:06.000Z\",\n        \"updatedAt\": \"2026-09-12T14:07:06.000Z\"\n    },\n    {\n        \"id\": 211,\n        \"name\": \"halo ini saya\",\n        \"slug\": \"halo-ini-saya\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:23:58.000Z\",\n        \"updatedAt\": \"2026-09-12T14:23:58.000Z\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Create Category",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();\r",
+              "\r",
+              "// Setting environment\r",
+              "pm.environment.set(\"categoryId\", response.id);\r",
+              "pm.environment.set(\"categoryName\", response.name);\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 200 or 201\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Response body is valid JSON\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "});\r",
+              "\r",
+              "// 4. Cek semua field yang wajib ada\r",
+              "pm.test(\"Response has all required fields\", function () {\r",
+              "    pm.expect(response).to.have.property(\"id\");\r",
+              "    pm.expect(response).to.have.property(\"name\");\r",
+              "    pm.expect(response).to.have.property(\"slug\");\r",
+              "    pm.expect(response).to.have.property(\"image\");\r",
+              "    pm.expect(response).to.have.property(\"creationAt\");\r",
+              "    pm.expect(response).to.have.property(\"updatedAt\");\r",
+              "});\r",
+              "\r",
+              "// 5. Cek data yang sudah ditambahkan\r",
+              "pm.test(\"Check added data\", function () {\r",
+              "    pm.expect(response.name).to.eql(pm.environment.get(\"categoryName\"));\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{categoryName}}",
+              "type": "text",
+              "uuid": "54fa61d9-1d27-4c87-8014-d762bea513e4"
+            },
+            {
+              "key": "image",
+              "value": "https://picsum.photos/1300/1200",
+              "type": "text",
+              "uuid": "a80d48b8-fa66-4abe-ba9b-31074e9351a8"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/categories/",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            ""
+          ]
+        },
+        "description": "Menambahkan data baru ke categories."
+      },
+      "response": [
+        {
+          "name": "Create Category",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "Jambrong",
+                  "type": "text",
+                  "uuid": "54fa61d9-1d27-4c87-8014-d762bea513e4"
+                },
+                {
+                  "key": "image",
+                  "value": "https://picsum.photos/1300/1200",
+                  "type": "text",
+                  "uuid": "a80d48b8-fa66-4abe-ba9b-31074e9351a8"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/categories/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "167"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:02:54 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"a7-EumryWo09LNepUB+x6CC8//FTyc\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=tfTXVBmefrVJMbgtc867L7UrZgHn3I4Jq1zFy%2F85Myg%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221774\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=tfTXVBmefrVJMbgtc867L7UrZgHn3I4Jq1zFy%2F85Myg%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221774\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 208,\n    \"name\": \"Jambrong\",\n    \"slug\": \"jambrong\",\n    \"image\": \"https://picsum.photos/1300/1200\",\n    \"creationAt\": \"2026-09-12T14:02:54.000Z\",\n    \"updatedAt\": \"2026-09-12T14:02:54.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Cek ID Masih sama\r",
+              "pm.test(\"ID matches the requested resource id (unchanged)\", function () {\r",
+              "    const requestedId = pm.environment.get(\"categoryId\"); // id yang dipakai saat call PUT /categories/{{categoryId}}\r",
+              "    pm.expect(jsonData.id.toString()).to.eql(requestedId.toString());\r",
+              "});\r",
+              "\r",
+              "// 4. Cek Nama dan Image yang sudah di update sesuai\r",
+              "pm.test(\"Name is updated correctly\", function () {\r",
+              "    const newName = pm.environment.get(\"categoryNameNew\"); // nama baru yang diupdate\r",
+              "    pm.expect(jsonData.name).to.eql(newName);\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{categoryNameNew}}",
+              "type": "text",
+              "uuid": "54fa61d9-1d27-4c87-8014-d762bea513e4"
+            },
+            {
+              "key": "image",
+              "value": "https://picsum.photos/500/500",
+              "type": "text",
+              "uuid": "a80d48b8-fa66-4abe-ba9b-31074e9351a8"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/categories/{{categoryId}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "{{categoryId}}"
+          ]
+        },
+        "description": "Update data pada ID tertentu."
+      },
+      "response": [
+        {
+          "name": "Update Data ID 208",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "Kepin",
+                  "type": "text",
+                  "uuid": "54fa61d9-1d27-4c87-8014-d762bea513e4"
+                },
+                {
+                  "key": "image",
+                  "value": "https://picsum.photos/500/500",
+                  "type": "text",
+                  "uuid": "a80d48b8-fa66-4abe-ba9b-31074e9351a8"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/categories/208",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "208"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "159"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:03:38 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"9f-XOsdOQxAauHXTNjuJxxbYifAk8s\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=sZNZn33PNrc5Z1rRNmvReWNBY%2B0TQ7mWtcrL6mIM0WU%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221818\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=sZNZn33PNrc5Z1rRNmvReWNBY%2B0TQ7mWtcrL6mIM0WU%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221818\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 208,\n    \"name\": \"Kepin\",\n    \"slug\": \"kepin\",\n    \"image\": \"https://picsum.photos/500/500\",\n    \"creationAt\": \"2026-09-12T14:02:54.000Z\",\n    \"updatedAt\": \"2026-09-12T14:03:38.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Data by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();\r",
+              "const jsonData = pm.response.json();\r",
+              "pm.environment.set(\"categoryId\", response.slug);\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 200\", function () {  \r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Cek semua field wajib ada\r",
+              "pm.test(\"Response has all required fields\", function () {\r",
+              "    pm.expect(jsonData).to.have.property(\"id\");\r",
+              "    pm.expect(jsonData).to.have.property(\"name\");\r",
+              "    pm.expect(jsonData).to.have.property(\"slug\");\r",
+              "    pm.expect(jsonData).to.have.property(\"image\");\r",
+              "    pm.expect(jsonData).to.have.property(\"creationAt\");\r",
+              "    pm.expect(jsonData).to.have.property(\"updatedAt\");\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories/{{getByID}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "{{getByID}}"
+          ]
+        },
+        "description": "Menampilkan data berdasarkan ID Valid yang terdaftar."
+      },
+      "response": [
+        {
+          "name": "Get Data by ID",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories/5",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "5"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "172"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:01:10 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"ac-YUf0rL/oR1dKPyCCMHNoJ9M/zG4\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=X6In29XVRjJ7T8gP5jVfy1KYpr2gn8GAIeD9Tw8PVXE%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221670\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=X6In29XVRjJ7T8gP5jVfy1KYpr2gn8GAIeD9Tw8PVXE%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221670\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 5,\n    \"name\": \"Baju Wanita\",\n    \"slug\": \"baju-wanita\",\n    \"image\": \"https://placeimg.com/640/480/any\",\n    \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n    \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Data by Invalid ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Parse response\r",
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Response body is valid JSON (meskipun cuma boolean, tetap valid JSON)\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "});\r",
+              "\r",
+              "// 4. Check response fields\r",
+              "pm.test(\"Response has all required fields\", function () {\r",
+              "    pm.expect(jsonData).to.have.property(\"error\");\r",
+              "    pm.expect(jsonData).to.have.property(\"message\");\r",
+              "});\r",
+              "\r",
+              "// 8. Hapus environment variable id yang tadi disimpan (cleanup, karena resource udah nggak ada)\r",
+              "// pm.test(\"Clear stored categoryId after successful delete\", function () {\r",
+              "//     pm.environment.unset(\"categoryId\");\r",
+              "//     pm.expect(pm.environment.get(\"categoryId\")).to.be.undefined;\r",
+              "// });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories/{{invalidID}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "{{invalidID}}"
+          ]
+        },
+        "description": "Menampilkan data berdasarkan ID Valid yang terdaftar."
+      },
+      "response": [
+        {
+          "name": "Get Data by ID",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories/5",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "5"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "172"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:01:10 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"ac-YUf0rL/oR1dKPyCCMHNoJ9M/zG4\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=X6In29XVRjJ7T8gP5jVfy1KYpr2gn8GAIeD9Tw8PVXE%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221670\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=X6In29XVRjJ7T8gP5jVfy1KYpr2gn8GAIeD9Tw8PVXE%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221670\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 5,\n    \"name\": \"Baju Wanita\",\n    \"slug\": \"baju-wanita\",\n    \"image\": \"https://placeimg.com/640/480/any\",\n    \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n    \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Data if ID Not Number",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Parse response\r",
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Response body is valid JSON (meskipun cuma boolean, tetap valid JSON)\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "});\r",
+              "\r",
+              "// 4. Check response fields\r",
+              "pm.test(\"Response has all required fields\", function () {\r",
+              "    pm.expect(jsonData).to.have.property(\"error\");\r",
+              "    pm.expect(jsonData).to.have.property(\"message\");\r",
+              "});\r",
+              "\r",
+              "// 8. Hapus environment variable id yang tadi disimpan (cleanup, karena resource udah nggak ada)\r",
+              "// pm.test(\"Clear stored categoryId after successful delete\", function () {\r",
+              "//     pm.environment.unset(\"categoryId\");\r",
+              "//     pm.expect(pm.environment.get(\"categoryId\")).to.be.undefined;\r",
+              "// });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories/abcd",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "abcd"
+          ]
+        },
+        "description": "Menampilkan data berdasarkan ID Valid yang terdaftar."
+      },
+      "response": [
+        {
+          "name": "Get Data by ID",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories/5",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "5"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "172"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:01:10 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"ac-YUf0rL/oR1dKPyCCMHNoJ9M/zG4\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=X6In29XVRjJ7T8gP5jVfy1KYpr2gn8GAIeD9Tw8PVXE%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221670\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=X6In29XVRjJ7T8gP5jVfy1KYpr2gn8GAIeD9Tw8PVXE%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221670\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 5,\n    \"name\": \"Baju Wanita\",\n    \"slug\": \"baju-wanita\",\n    \"image\": \"https://placeimg.com/640/480/any\",\n    \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n    \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Data by Slug",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Response body is valid JSON\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "});\r",
+              "\r",
+              "// 4. Cek slug ada\r",
+              "pm.test(\"Check slug available\", function () {\r",
+              "    const getSlug = pm.environment.get(\"getBySlug\");\r",
+              "    pm.expect(jsonData.slug).to.eql(getSlug);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories/slug/{{getBySlug}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "slug",
+            "{{getBySlug}}"
+          ]
+        },
+        "description": "Menampilkan data berdasarkan data Slug-nya."
+      },
+      "response": [
+        {
+          "name": "Get Data by Slug",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories/slug/furniture",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "slug",
+                "furniture"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "168"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:02:14 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"a8-EQgtmhSIG8bkDWBHKFXwygtHB1A\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=LQheqIfog9%2BvlmQfI%2Bw452B4VMIKqeVcTmTpT9a7Ce4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221734\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=LQheqIfog9%2BvlmQfI%2Bw452B4VMIKqeVcTmTpT9a7Ce4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221734\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 3,\n    \"name\": \"Furniture\",\n    \"slug\": \"furniture\",\n    \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n    \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n    \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Data if ID Not Number",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();\r",
+              "const jsonData = pm.response.json();\r",
+              "pm.environment.set(\"categoryId\", response.slug);\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 400\", function () {  \r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Check key error appear \"Bad Request\"\r",
+              "pm.test(\"Error key is present\", function () {\r",
+              "    pm.expect(jsonData.error).to.not.be.undefined;\r",
+              "    pm.expect(jsonData.error).to.equal(\"Bad Request\");\r",
+              "});\r",
+              "\r",
+              "// 4. Response assertion message \"Validation failed (numeric string is expected)\"\r",
+              "pm.test(\"Validation failed message is present\", function () {\r",
+              "    pm.expect(jsonData.message).to.not.be.undefined;\r",
+              "    pm.expect(jsonData.message).to.equal(\"Validation failed (numeric string is expected)\");\r",
+              "});\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories/{{invalidID}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "{{invalidID}}"
+          ]
+        },
+        "description": "Menampilkan data namun untuk ID diubah dengan selain angka."
+      },
+      "response": [
+        {
+          "name": "Get Data if ID Not Number",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories/test",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "test"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "99"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:03:58 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"63-fbYqGzam3W3FhpKYGVugOXQk+/M\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=jyOz0Gin%2FBvC1rs6s7jkriNmq5SW9ZEFoGcC%2BuCc0gc%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221838\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=jyOz0Gin%2FBvC1rs6s7jkriNmq5SW9ZEFoGcC%2BuCc0gc%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221838\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Validation failed (numeric string is expected)\",\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Only Slug",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Cek ID Masih sama\r",
+              "pm.test(\"ID matches the requested resource id (unchanged)\", function () {\r",
+              "    const requestedId = pm.environment.get(\"categoryId\");\r",
+              "    pm.expect(jsonData.id.toString()).to.eql(requestedId.toString());\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "slug",
+              "value": "{{updatePatch}}",
+              "type": "text",
+              "uuid": "d92bd45c-5b63-41ca-954f-8bd21c914ecf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/categories/{{categoryId}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "{{categoryId}}"
+          ]
+        },
+        "description": "Melakukan update data namun hanya key tertentu saja."
+      },
+      "response": [
+        {
+          "name": "Update Only Slug",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "slug",
+                  "value": "Slug-Kepiting",
+                  "type": "text",
+                  "uuid": "d92bd45c-5b63-41ca-954f-8bd21c914ecf"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/categories/208",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "208"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "86"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:04:20 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"56-nwUD5KdB4Sex85nlXwIxPbO8LQc\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=dlCFwXnQD52NOUnxueu8XnpQj5Liunb5LfpXokz%2FRcE%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221860\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=dlCFwXnQD52NOUnxueu8XnpQj5Liunb5LfpXokz%2FRcE%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221860\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Cannot PATCH /api/v1/categories/208\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+        },
+        {
+          "name": "Update Only Slug",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "slug",
+                  "value": "Slug-Kepiting",
+                  "type": "text",
+                  "uuid": "d92bd45c-5b63-41ca-954f-8bd21c914ecf"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/categories/208",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories",
+                "208"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "86"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:04:20 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"56-nwUD5KdB4Sex85nlXwIxPbO8LQc\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=dlCFwXnQD52NOUnxueu8XnpQj5Liunb5LfpXokz%2FRcE%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221860\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=dlCFwXnQD52NOUnxueu8XnpQj5Liunb5LfpXokz%2FRcE%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221860\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Cannot PATCH /api/v1/categories/208\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Data With Limit",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Check data with limit\r",
+              "pm.test(\"Check if limit is 3\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length).to.equal(3);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories?limit=3",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "3"
+            }
+          ]
+        },
+        "description": "Menampilkan data dengan limit (batas data yang ditampilkan) yang dihitung dari index 0."
+      },
+      "response": [
+        {
+          "name": "Get Data With Limit",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories?limit=3",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "538"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:04:48 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"21a-tO5bQOUKEO4a+cdatzv9SfsyMrE\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=i3ukN3M2Q7yfiHXolWJd%2F89kqxtBNzBOTxhZ6AxbzsE%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221888\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=i3ukN3M2Q7yfiHXolWJd%2F89kqxtBNzBOTxhZ6AxbzsE%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221888\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Updated Category Name\",\n        \"slug\": \"updated-category-name\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:26:13.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Sepatu sandaal\",\n        \"slug\": \"sepatu-sandaal\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:15:23.000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Furniture\",\n        \"slug\": \"furniture\",\n        \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Delete Data Valid ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Parse response\r",
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Response body is valid JSON (meskipun cuma boolean, tetap valid JSON)\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "});\r",
+              "\r",
+              "// 6. PENTING — Cek tipe data adalah boolean\r",
+              "pm.test(\"Response is a boolean\", function () {\r",
+              "    pm.expect(jsonData).to.be.a(\"boolean\");\r",
+              "});\r",
+              "\r",
+              "// 7. PENTING — Cek value harus true (delete berhasil)\r",
+              "pm.test(\"Delete operation returns true\", function () {\r",
+              "    pm.expect(jsonData).to.eql(true);\r",
+              "});\r",
+              "\r",
+              "// 8. Hapus environment variable id yang tadi disimpan (cleanup, karena resource udah nggak ada)\r",
+              "// pm.test(\"Clear stored categoryId after successful delete\", function () {\r",
+              "//     pm.environment.unset(\"categoryId\");\r",
+              "//     pm.expect(pm.environment.get(\"categoryId\")).to.be.undefined;\r",
+              "// });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories/{{getByID}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "{{getByID}}"
+          ]
+        },
+        "description": "Menampilkan seluruh data categories yang ada."
+      },
+      "response": [
+        {
+          "name": "Get All Data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "5404"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:00:20 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"151c-ws4PXNDuFbKmee4LUTAj1yzMdLQ\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=hpdZJNZ1wf21r5KBM2kXL7%2FxfgXHnMECZGW%2BXCfJkNs%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221620\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=hpdZJNZ1wf21r5KBM2kXL7%2FxfgXHnMECZGW%2BXCfJkNs%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221620\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Updated Category Name\",\n        \"slug\": \"updated-category-name\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:26:13.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Sepatu sandaal\",\n        \"slug\": \"sepatu-sandaal\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:15:23.000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Furniture\",\n        \"slug\": \"furniture\",\n        \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shoes\",\n        \"slug\": \"shoes\",\n        \"image\": \"https://i.imgur.com/qNOjJje.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Baju Wanita\",\n        \"slug\": \"baju-wanita\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"animals\",\n        \"slug\": \"animals\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T02:40:37.000Z\",\n        \"updatedAt\": \"2026-09-12T09:58:14.000Z\"\n    },\n    {\n        \"id\": 18,\n        \"name\": \"coba testing update categori\",\n        \"slug\": \"coba-testing-update-categori\",\n        \"image\": \"https://placehold.co/700x400\",\n        \"creationAt\": \"2026-09-12T02:50:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:23:45.000Z\"\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Loomweave Goods 1789182300\",\n        \"slug\": \"loomweave-goods-1789182300\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:05:02.000Z\",\n        \"updatedAt\": \"2026-09-12T03:05:02.000Z\"\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Loomweave Goods ref182687\",\n        \"slug\": \"loomweave-goods-ref182687\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:11:28.000Z\",\n        \"updatedAt\": \"2026-09-12T03:11:28.000Z\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Books_ad280653d1b3401ca77497dc63bbed14\",\n        \"slug\": \"books-ad280653d1b3401ca77497dc63bbed14\",\n        \"image\": \"https://www.herman.com/\",\n        \"creationAt\": \"2026-09-12T03:48:35.000Z\",\n        \"updatedAt\": \"2026-09-12T03:48:35.000Z\"\n    },\n    {\n        \"id\": 54,\n        \"name\": \"Elektronik Rumah Tangga\",\n        \"slug\": \"elektronik-rumah-tangga\",\n        \"image\": \"https://picsum.photos/640/480\",\n        \"creationAt\": \"2026-09-12T05:30:11.000Z\",\n        \"updatedAt\": \"2026-09-12T05:30:11.000Z\"\n    },\n    {\n        \"id\": 55,\n        \"name\": \"Stationary\",\n        \"slug\": \"stationary\",\n        \"image\": \"https://api.escuelajs.co/api/v1/files/4e2b.png\",\n        \"creationAt\": \"2026-09-12T06:00:34.000Z\",\n        \"updatedAt\": \"2026-09-12T06:35:00.000Z\"\n    },\n    {\n        \"id\": 59,\n        \"name\": \"Campground Compass Ledger - Field Operations\",\n        \"slug\": \"campground-compass-ledger-field-operations\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:28:31.000Z\",\n        \"updatedAt\": \"2026-09-12T06:28:34.000Z\"\n    },\n    {\n        \"id\": 62,\n        \"name\": \"Campground Compass Ledger 8042\",\n        \"slug\": \"campground-compass-ledger-8042\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:43:33.000Z\",\n        \"updatedAt\": \"2026-09-12T06:43:33.000Z\"\n    },\n    {\n        \"id\": 66,\n        \"name\": \"Campground Compass Ledger - Field Operations #66\",\n        \"slug\": \"campground-compass-ledger-field-operations-66\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:06:01.000Z\",\n        \"updatedAt\": \"2026-09-12T07:06:04.000Z\"\n    },\n    {\n        \"id\": 71,\n        \"name\": \"Campground Compass Ledger - Field Operations #71\",\n        \"slug\": \"campground-compass-ledger-field-operations-71\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:12:23.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:26.000Z\"\n    },\n    {\n        \"id\": 72,\n        \"name\": \"Ref Meridian\",\n        \"slug\": \"ref-meridian\",\n        \"image\": \"https://picsum.photos/seed/refmer/600\",\n        \"creationAt\": \"2026-09-12T07:12:51.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:51.000Z\"\n    },\n    {\n        \"id\": 73,\n        \"name\": \"Campground Compass Recon Ledger f5b1 - Field Operations #73\",\n        \"slug\": \"campground-compass-recon-ledger-f5b1-field-operations-73\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:13:41.000Z\",\n        \"updatedAt\": \"2026-09-12T07:13:44.000Z\"\n    },\n    {\n        \"id\": 75,\n        \"name\": \"Campground Compass Ledger - Field Operations #75\",\n        \"slug\": \"campground-compass-ledger-field-operations-75\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:16:33.000Z\",\n        \"updatedAt\": \"2026-09-12T07:17:31.000Z\"\n    },\n    {\n        \"id\": 78,\n        \"name\": \"ProbeCat15783\",\n        \"slug\": \"probecat15783\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:21:21.000Z\",\n        \"updatedAt\": \"2026-09-12T07:21:21.000Z\"\n    },\n    {\n        \"id\": 82,\n        \"name\": \"Make Up Beauty\",\n        \"slug\": \"make-up-beauty\",\n        \"image\": \"https://placeimg.com/640/480/beauty\",\n        \"creationAt\": \"2026-09-12T07:25:52.000Z\",\n        \"updatedAt\": \"2026-09-12T12:44:31.000Z\"\n    },\n    {\n        \"id\": 196,\n        \"name\": \"electronics\",\n        \"slug\": \"electronics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:16:36.000Z\",\n        \"updatedAt\": \"2026-09-12T13:17:16.000Z\"\n    },\n    {\n        \"id\": 198,\n        \"name\": \"QA Test Category\",\n        \"slug\": \"qa-test-category\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:20:58.000Z\",\n        \"updatedAt\": \"2026-09-12T13:20:58.000Z\"\n    },\n    {\n        \"id\": 199,\n        \"name\": \"nics\",\n        \"slug\": \"nics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:30:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:31:57.000Z\"\n    },\n    {\n        \"id\": 200,\n        \"name\": \"Laptop\",\n        \"slug\": \"laptop\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:14.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:14.000Z\"\n    },\n    {\n        \"id\": 201,\n        \"name\": \"Mixer\",\n        \"slug\": \"mixer\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:15.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:15.000Z\"\n    },\n    {\n        \"id\": 202,\n        \"name\": \"Monitor\",\n        \"slug\": \"monitor\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:17.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:17.000Z\"\n    },\n    {\n        \"id\": 205,\n        \"name\": \"Kucing Jambrong\",\n        \"slug\": \"kucing-jambrong\",\n        \"image\": \"https://picsum.photos/1300/1200\",\n        \"creationAt\": \"2026-09-12T13:56:22.000Z\",\n        \"updatedAt\": \"2026-09-12T13:56:22.000Z\"\n    }\n]"
+        },
+        {
+          "name": "Get All Data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "6336"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:26:39 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"18c0-0Vf9Sng6Aq9++nLUCbyG7km9Igc\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=eqzL6CYw%2FJ1sgK2PRT1BdPQA1xyfcunMmeX%2FZ6xaFu4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789223199\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=eqzL6CYw%2FJ1sgK2PRT1BdPQA1xyfcunMmeX%2FZ6xaFu4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789223199\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Updated Category Name\",\n        \"slug\": \"updated-category-name\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:26:13.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Sepatu sandaal\",\n        \"slug\": \"sepatu-sandaal\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:15:23.000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Food & Beverages Update\",\n        \"slug\": \"food-beverages-update\",\n        \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T14:14:12.000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shoes\",\n        \"slug\": \"shoes\",\n        \"image\": \"https://i.imgur.com/qNOjJje.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Baju Wanita\",\n        \"slug\": \"baju-wanita\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"animals\",\n        \"slug\": \"animals\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T02:40:37.000Z\",\n        \"updatedAt\": \"2026-09-12T09:58:14.000Z\"\n    },\n    {\n        \"id\": 18,\n        \"name\": \"coba testing update categori\",\n        \"slug\": \"coba-testing-update-categori\",\n        \"image\": \"https://placehold.co/700x400\",\n        \"creationAt\": \"2026-09-12T02:50:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:23:45.000Z\"\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Loomweave Goods 1789182300\",\n        \"slug\": \"loomweave-goods-1789182300\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:05:02.000Z\",\n        \"updatedAt\": \"2026-09-12T03:05:02.000Z\"\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Loomweave Goods ref182687\",\n        \"slug\": \"loomweave-goods-ref182687\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:11:28.000Z\",\n        \"updatedAt\": \"2026-09-12T03:11:28.000Z\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Books_ad280653d1b3401ca77497dc63bbed14\",\n        \"slug\": \"books-ad280653d1b3401ca77497dc63bbed14\",\n        \"image\": \"https://www.herman.com/\",\n        \"creationAt\": \"2026-09-12T03:48:35.000Z\",\n        \"updatedAt\": \"2026-09-12T03:48:35.000Z\"\n    },\n    {\n        \"id\": 54,\n        \"name\": \"Elektronik Rumah Tangga\",\n        \"slug\": \"elektronik-rumah-tangga\",\n        \"image\": \"https://picsum.photos/640/480\",\n        \"creationAt\": \"2026-09-12T05:30:11.000Z\",\n        \"updatedAt\": \"2026-09-12T05:30:11.000Z\"\n    },\n    {\n        \"id\": 55,\n        \"name\": \"Stationary\",\n        \"slug\": \"stationary\",\n        \"image\": \"https://api.escuelajs.co/api/v1/files/4e2b.png\",\n        \"creationAt\": \"2026-09-12T06:00:34.000Z\",\n        \"updatedAt\": \"2026-09-12T06:35:00.000Z\"\n    },\n    {\n        \"id\": 59,\n        \"name\": \"Campground Compass Ledger - Field Operations\",\n        \"slug\": \"campground-compass-ledger-field-operations\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:28:31.000Z\",\n        \"updatedAt\": \"2026-09-12T06:28:34.000Z\"\n    },\n    {\n        \"id\": 62,\n        \"name\": \"Campground Compass Ledger 8042\",\n        \"slug\": \"campground-compass-ledger-8042\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:43:33.000Z\",\n        \"updatedAt\": \"2026-09-12T06:43:33.000Z\"\n    },\n    {\n        \"id\": 66,\n        \"name\": \"Campground Compass Ledger - Field Operations #66\",\n        \"slug\": \"campground-compass-ledger-field-operations-66\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:06:01.000Z\",\n        \"updatedAt\": \"2026-09-12T07:06:04.000Z\"\n    },\n    {\n        \"id\": 71,\n        \"name\": \"Campground Compass Ledger - Field Operations #71\",\n        \"slug\": \"campground-compass-ledger-field-operations-71\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:12:23.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:26.000Z\"\n    },\n    {\n        \"id\": 72,\n        \"name\": \"Ref Meridian\",\n        \"slug\": \"ref-meridian\",\n        \"image\": \"https://picsum.photos/seed/refmer/600\",\n        \"creationAt\": \"2026-09-12T07:12:51.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:51.000Z\"\n    },\n    {\n        \"id\": 73,\n        \"name\": \"Campground Compass Recon Ledger f5b1 - Field Operations #73\",\n        \"slug\": \"campground-compass-recon-ledger-f5b1-field-operations-73\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:13:41.000Z\",\n        \"updatedAt\": \"2026-09-12T07:13:44.000Z\"\n    },\n    {\n        \"id\": 75,\n        \"name\": \"Campground Compass Ledger - Field Operations #75\",\n        \"slug\": \"campground-compass-ledger-field-operations-75\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:16:33.000Z\",\n        \"updatedAt\": \"2026-09-12T07:17:31.000Z\"\n    },\n    {\n        \"id\": 78,\n        \"name\": \"ProbeCat15783\",\n        \"slug\": \"probecat15783\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:21:21.000Z\",\n        \"updatedAt\": \"2026-09-12T07:21:21.000Z\"\n    },\n    {\n        \"id\": 82,\n        \"name\": \"Make Up Beauty\",\n        \"slug\": \"make-up-beauty\",\n        \"image\": \"https://placeimg.com/640/480/beauty\",\n        \"creationAt\": \"2026-09-12T07:25:52.000Z\",\n        \"updatedAt\": \"2026-09-12T12:44:31.000Z\"\n    },\n    {\n        \"id\": 196,\n        \"name\": \"electronics\",\n        \"slug\": \"electronics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:16:36.000Z\",\n        \"updatedAt\": \"2026-09-12T13:17:16.000Z\"\n    },\n    {\n        \"id\": 198,\n        \"name\": \"QA Test Category\",\n        \"slug\": \"qa-test-category\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:20:58.000Z\",\n        \"updatedAt\": \"2026-09-12T13:20:58.000Z\"\n    },\n    {\n        \"id\": 199,\n        \"name\": \"nics\",\n        \"slug\": \"nics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:30:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:31:57.000Z\"\n    },\n    {\n        \"id\": 200,\n        \"name\": \"Laptop\",\n        \"slug\": \"laptop\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:14.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:14.000Z\"\n    },\n    {\n        \"id\": 201,\n        \"name\": \"Mixer\",\n        \"slug\": \"mixer\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:15.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:15.000Z\"\n    },\n    {\n        \"id\": 202,\n        \"name\": \"Monitor\",\n        \"slug\": \"monitor\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:17.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:17.000Z\"\n    },\n    {\n        \"id\": 205,\n        \"name\": \"Kucing Jambrong\",\n        \"slug\": \"kucing-jambrong\",\n        \"image\": \"https://picsum.photos/1300/1200\",\n        \"creationAt\": \"2026-09-12T13:56:22.000Z\",\n        \"updatedAt\": \"2026-09-12T13:56:22.000Z\"\n    },\n    {\n        \"id\": 206,\n        \"name\": \"QA Automation with Postman\",\n        \"slug\": \"qa-automation-with-postman\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:01:05.000Z\",\n        \"updatedAt\": \"2026-09-12T14:01:05.000Z\"\n    },\n    {\n        \"id\": 207,\n        \"name\": \"Sanbercode 123\",\n        \"slug\": \"sanbercode-123\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:02:34.000Z\",\n        \"updatedAt\": \"2026-09-12T14:02:34.000Z\"\n    },\n    {\n        \"id\": 209,\n        \"name\": \"jemyka123\",\n        \"slug\": \"jemyka123\",\n        \"image\": \"https://placeimg.com/640/480/tech\",\n        \"creationAt\": \"2026-09-12T14:05:28.000Z\",\n        \"updatedAt\": \"2026-09-12T14:05:28.000Z\"\n    },\n    {\n        \"id\": 210,\n        \"name\": \"halo 123\",\n        \"slug\": \"halo-123\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:07:06.000Z\",\n        \"updatedAt\": \"2026-09-12T14:07:06.000Z\"\n    },\n    {\n        \"id\": 211,\n        \"name\": \"halo ini saya\",\n        \"slug\": \"halo-ini-saya\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:23:58.000Z\",\n        \"updatedAt\": \"2026-09-12T14:23:58.000Z\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Delete Data invalid ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Parse response\r",
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "// 1. Status Code\r",
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. Response Time\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "// 3. Response body is valid JSON (meskipun cuma boolean, tetap valid JSON)\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "});\r",
+              "\r",
+              "// 4. Check response fields\r",
+              "pm.test(\"Response has all required fields\", function () {\r",
+              "    pm.expect(jsonData).to.have.property(\"name\");\r",
+              "    pm.expect(jsonData).to.have.property(\"message\");\r",
+              "});\r",
+              "\r",
+              "// 8. Hapus environment variable id yang tadi disimpan (cleanup, karena resource udah nggak ada)\r",
+              "// pm.test(\"Clear stored categoryId after successful delete\", function () {\r",
+              "//     pm.environment.unset(\"categoryId\");\r",
+              "//     pm.expect(pm.environment.get(\"categoryId\")).to.be.undefined;\r",
+              "// });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/categories/{{invalidID}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories",
+            "{{invalidID}}"
+          ]
+        },
+        "description": "Menampilkan seluruh data categories yang ada."
+      },
+      "response": [
+        {
+          "name": "Get All Data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "5404"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:00:20 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"151c-ws4PXNDuFbKmee4LUTAj1yzMdLQ\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=hpdZJNZ1wf21r5KBM2kXL7%2FxfgXHnMECZGW%2BXCfJkNs%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789221620\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=hpdZJNZ1wf21r5KBM2kXL7%2FxfgXHnMECZGW%2BXCfJkNs%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789221620\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Updated Category Name\",\n        \"slug\": \"updated-category-name\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:26:13.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Sepatu sandaal\",\n        \"slug\": \"sepatu-sandaal\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:15:23.000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Furniture\",\n        \"slug\": \"furniture\",\n        \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shoes\",\n        \"slug\": \"shoes\",\n        \"image\": \"https://i.imgur.com/qNOjJje.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Baju Wanita\",\n        \"slug\": \"baju-wanita\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"animals\",\n        \"slug\": \"animals\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T02:40:37.000Z\",\n        \"updatedAt\": \"2026-09-12T09:58:14.000Z\"\n    },\n    {\n        \"id\": 18,\n        \"name\": \"coba testing update categori\",\n        \"slug\": \"coba-testing-update-categori\",\n        \"image\": \"https://placehold.co/700x400\",\n        \"creationAt\": \"2026-09-12T02:50:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:23:45.000Z\"\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Loomweave Goods 1789182300\",\n        \"slug\": \"loomweave-goods-1789182300\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:05:02.000Z\",\n        \"updatedAt\": \"2026-09-12T03:05:02.000Z\"\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Loomweave Goods ref182687\",\n        \"slug\": \"loomweave-goods-ref182687\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:11:28.000Z\",\n        \"updatedAt\": \"2026-09-12T03:11:28.000Z\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Books_ad280653d1b3401ca77497dc63bbed14\",\n        \"slug\": \"books-ad280653d1b3401ca77497dc63bbed14\",\n        \"image\": \"https://www.herman.com/\",\n        \"creationAt\": \"2026-09-12T03:48:35.000Z\",\n        \"updatedAt\": \"2026-09-12T03:48:35.000Z\"\n    },\n    {\n        \"id\": 54,\n        \"name\": \"Elektronik Rumah Tangga\",\n        \"slug\": \"elektronik-rumah-tangga\",\n        \"image\": \"https://picsum.photos/640/480\",\n        \"creationAt\": \"2026-09-12T05:30:11.000Z\",\n        \"updatedAt\": \"2026-09-12T05:30:11.000Z\"\n    },\n    {\n        \"id\": 55,\n        \"name\": \"Stationary\",\n        \"slug\": \"stationary\",\n        \"image\": \"https://api.escuelajs.co/api/v1/files/4e2b.png\",\n        \"creationAt\": \"2026-09-12T06:00:34.000Z\",\n        \"updatedAt\": \"2026-09-12T06:35:00.000Z\"\n    },\n    {\n        \"id\": 59,\n        \"name\": \"Campground Compass Ledger - Field Operations\",\n        \"slug\": \"campground-compass-ledger-field-operations\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:28:31.000Z\",\n        \"updatedAt\": \"2026-09-12T06:28:34.000Z\"\n    },\n    {\n        \"id\": 62,\n        \"name\": \"Campground Compass Ledger 8042\",\n        \"slug\": \"campground-compass-ledger-8042\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:43:33.000Z\",\n        \"updatedAt\": \"2026-09-12T06:43:33.000Z\"\n    },\n    {\n        \"id\": 66,\n        \"name\": \"Campground Compass Ledger - Field Operations #66\",\n        \"slug\": \"campground-compass-ledger-field-operations-66\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:06:01.000Z\",\n        \"updatedAt\": \"2026-09-12T07:06:04.000Z\"\n    },\n    {\n        \"id\": 71,\n        \"name\": \"Campground Compass Ledger - Field Operations #71\",\n        \"slug\": \"campground-compass-ledger-field-operations-71\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:12:23.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:26.000Z\"\n    },\n    {\n        \"id\": 72,\n        \"name\": \"Ref Meridian\",\n        \"slug\": \"ref-meridian\",\n        \"image\": \"https://picsum.photos/seed/refmer/600\",\n        \"creationAt\": \"2026-09-12T07:12:51.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:51.000Z\"\n    },\n    {\n        \"id\": 73,\n        \"name\": \"Campground Compass Recon Ledger f5b1 - Field Operations #73\",\n        \"slug\": \"campground-compass-recon-ledger-f5b1-field-operations-73\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:13:41.000Z\",\n        \"updatedAt\": \"2026-09-12T07:13:44.000Z\"\n    },\n    {\n        \"id\": 75,\n        \"name\": \"Campground Compass Ledger - Field Operations #75\",\n        \"slug\": \"campground-compass-ledger-field-operations-75\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:16:33.000Z\",\n        \"updatedAt\": \"2026-09-12T07:17:31.000Z\"\n    },\n    {\n        \"id\": 78,\n        \"name\": \"ProbeCat15783\",\n        \"slug\": \"probecat15783\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:21:21.000Z\",\n        \"updatedAt\": \"2026-09-12T07:21:21.000Z\"\n    },\n    {\n        \"id\": 82,\n        \"name\": \"Make Up Beauty\",\n        \"slug\": \"make-up-beauty\",\n        \"image\": \"https://placeimg.com/640/480/beauty\",\n        \"creationAt\": \"2026-09-12T07:25:52.000Z\",\n        \"updatedAt\": \"2026-09-12T12:44:31.000Z\"\n    },\n    {\n        \"id\": 196,\n        \"name\": \"electronics\",\n        \"slug\": \"electronics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:16:36.000Z\",\n        \"updatedAt\": \"2026-09-12T13:17:16.000Z\"\n    },\n    {\n        \"id\": 198,\n        \"name\": \"QA Test Category\",\n        \"slug\": \"qa-test-category\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:20:58.000Z\",\n        \"updatedAt\": \"2026-09-12T13:20:58.000Z\"\n    },\n    {\n        \"id\": 199,\n        \"name\": \"nics\",\n        \"slug\": \"nics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:30:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:31:57.000Z\"\n    },\n    {\n        \"id\": 200,\n        \"name\": \"Laptop\",\n        \"slug\": \"laptop\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:14.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:14.000Z\"\n    },\n    {\n        \"id\": 201,\n        \"name\": \"Mixer\",\n        \"slug\": \"mixer\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:15.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:15.000Z\"\n    },\n    {\n        \"id\": 202,\n        \"name\": \"Monitor\",\n        \"slug\": \"monitor\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:17.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:17.000Z\"\n    },\n    {\n        \"id\": 205,\n        \"name\": \"Kucing Jambrong\",\n        \"slug\": \"kucing-jambrong\",\n        \"image\": \"https://picsum.photos/1300/1200\",\n        \"creationAt\": \"2026-09-12T13:56:22.000Z\",\n        \"updatedAt\": \"2026-09-12T13:56:22.000Z\"\n    }\n]"
+        },
+        {
+          "name": "Get All Data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/categories",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Length",
+              "value": "6336"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;img-src 'self' data: https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Resource-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 12 Sep 2026 14:26:39 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"18c0-0Vf9Sng6Aq9++nLUCbyG7km9Igc\""
+            },
+            {
+              "key": "Nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}"
+            },
+            {
+              "key": "Origin-Agent-Cluster",
+              "value": "?1"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Report-To",
+              "value": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=eqzL6CYw%2FJ1sgK2PRT1BdPQA1xyfcunMmeX%2FZ6xaFu4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1789223199\"}],\"max_age\":3600}"
+            },
+            {
+              "key": "Reporting-Endpoints",
+              "value": "heroku-nel=\"https://nel.heroku.com/reports?s=eqzL6CYw%2FJ1sgK2PRT1BdPQA1xyfcunMmeX%2FZ6xaFu4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1789223199\""
+            },
+            {
+              "key": "Server",
+              "value": "Heroku"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "Via",
+              "value": "1.1 heroku-router"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "0"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Updated Category Name\",\n        \"slug\": \"updated-category-name\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:26:13.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Sepatu sandaal\",\n        \"slug\": \"sepatu-sandaal\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T13:15:23.000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Food & Beverages Update\",\n        \"slug\": \"food-beverages-update\",\n        \"image\": \"https://i.imgur.com/Qphac99.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T14:14:12.000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shoes\",\n        \"slug\": \"shoes\",\n        \"image\": \"https://i.imgur.com/qNOjJje.jpeg\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T00:51:42.000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Baju Wanita\",\n        \"slug\": \"baju-wanita\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T00:51:42.000Z\",\n        \"updatedAt\": \"2026-09-12T07:51:16.000Z\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"animals\",\n        \"slug\": \"animals\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T02:40:37.000Z\",\n        \"updatedAt\": \"2026-09-12T09:58:14.000Z\"\n    },\n    {\n        \"id\": 18,\n        \"name\": \"coba testing update categori\",\n        \"slug\": \"coba-testing-update-categori\",\n        \"image\": \"https://placehold.co/700x400\",\n        \"creationAt\": \"2026-09-12T02:50:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:23:45.000Z\"\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Loomweave Goods 1789182300\",\n        \"slug\": \"loomweave-goods-1789182300\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:05:02.000Z\",\n        \"updatedAt\": \"2026-09-12T03:05:02.000Z\"\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Loomweave Goods ref182687\",\n        \"slug\": \"loomweave-goods-ref182687\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T03:11:28.000Z\",\n        \"updatedAt\": \"2026-09-12T03:11:28.000Z\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Books_ad280653d1b3401ca77497dc63bbed14\",\n        \"slug\": \"books-ad280653d1b3401ca77497dc63bbed14\",\n        \"image\": \"https://www.herman.com/\",\n        \"creationAt\": \"2026-09-12T03:48:35.000Z\",\n        \"updatedAt\": \"2026-09-12T03:48:35.000Z\"\n    },\n    {\n        \"id\": 54,\n        \"name\": \"Elektronik Rumah Tangga\",\n        \"slug\": \"elektronik-rumah-tangga\",\n        \"image\": \"https://picsum.photos/640/480\",\n        \"creationAt\": \"2026-09-12T05:30:11.000Z\",\n        \"updatedAt\": \"2026-09-12T05:30:11.000Z\"\n    },\n    {\n        \"id\": 55,\n        \"name\": \"Stationary\",\n        \"slug\": \"stationary\",\n        \"image\": \"https://api.escuelajs.co/api/v1/files/4e2b.png\",\n        \"creationAt\": \"2026-09-12T06:00:34.000Z\",\n        \"updatedAt\": \"2026-09-12T06:35:00.000Z\"\n    },\n    {\n        \"id\": 59,\n        \"name\": \"Campground Compass Ledger - Field Operations\",\n        \"slug\": \"campground-compass-ledger-field-operations\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:28:31.000Z\",\n        \"updatedAt\": \"2026-09-12T06:28:34.000Z\"\n    },\n    {\n        \"id\": 62,\n        \"name\": \"Campground Compass Ledger 8042\",\n        \"slug\": \"campground-compass-ledger-8042\",\n        \"image\": \"https://placehold.co/600x400.png\",\n        \"creationAt\": \"2026-09-12T06:43:33.000Z\",\n        \"updatedAt\": \"2026-09-12T06:43:33.000Z\"\n    },\n    {\n        \"id\": 66,\n        \"name\": \"Campground Compass Ledger - Field Operations #66\",\n        \"slug\": \"campground-compass-ledger-field-operations-66\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:06:01.000Z\",\n        \"updatedAt\": \"2026-09-12T07:06:04.000Z\"\n    },\n    {\n        \"id\": 71,\n        \"name\": \"Campground Compass Ledger - Field Operations #71\",\n        \"slug\": \"campground-compass-ledger-field-operations-71\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:12:23.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:26.000Z\"\n    },\n    {\n        \"id\": 72,\n        \"name\": \"Ref Meridian\",\n        \"slug\": \"ref-meridian\",\n        \"image\": \"https://picsum.photos/seed/refmer/600\",\n        \"creationAt\": \"2026-09-12T07:12:51.000Z\",\n        \"updatedAt\": \"2026-09-12T07:12:51.000Z\"\n    },\n    {\n        \"id\": 73,\n        \"name\": \"Campground Compass Recon Ledger f5b1 - Field Operations #73\",\n        \"slug\": \"campground-compass-recon-ledger-f5b1-field-operations-73\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:13:41.000Z\",\n        \"updatedAt\": \"2026-09-12T07:13:44.000Z\"\n    },\n    {\n        \"id\": 75,\n        \"name\": \"Campground Compass Ledger - Field Operations #75\",\n        \"slug\": \"campground-compass-ledger-field-operations-75\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:16:33.000Z\",\n        \"updatedAt\": \"2026-09-12T07:17:31.000Z\"\n    },\n    {\n        \"id\": 78,\n        \"name\": \"ProbeCat15783\",\n        \"slug\": \"probecat15783\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T07:21:21.000Z\",\n        \"updatedAt\": \"2026-09-12T07:21:21.000Z\"\n    },\n    {\n        \"id\": 82,\n        \"name\": \"Make Up Beauty\",\n        \"slug\": \"make-up-beauty\",\n        \"image\": \"https://placeimg.com/640/480/beauty\",\n        \"creationAt\": \"2026-09-12T07:25:52.000Z\",\n        \"updatedAt\": \"2026-09-12T12:44:31.000Z\"\n    },\n    {\n        \"id\": 196,\n        \"name\": \"electronics\",\n        \"slug\": \"electronics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:16:36.000Z\",\n        \"updatedAt\": \"2026-09-12T13:17:16.000Z\"\n    },\n    {\n        \"id\": 198,\n        \"name\": \"QA Test Category\",\n        \"slug\": \"qa-test-category\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:20:58.000Z\",\n        \"updatedAt\": \"2026-09-12T13:20:58.000Z\"\n    },\n    {\n        \"id\": 199,\n        \"name\": \"nics\",\n        \"slug\": \"nics\",\n        \"image\": \"https://placehold.co/600x400\",\n        \"creationAt\": \"2026-09-12T13:30:49.000Z\",\n        \"updatedAt\": \"2026-09-12T13:31:57.000Z\"\n    },\n    {\n        \"id\": 200,\n        \"name\": \"Laptop\",\n        \"slug\": \"laptop\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:14.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:14.000Z\"\n    },\n    {\n        \"id\": 201,\n        \"name\": \"Mixer\",\n        \"slug\": \"mixer\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:15.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:15.000Z\"\n    },\n    {\n        \"id\": 202,\n        \"name\": \"Monitor\",\n        \"slug\": \"monitor\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T13:49:17.000Z\",\n        \"updatedAt\": \"2026-09-12T13:49:17.000Z\"\n    },\n    {\n        \"id\": 205,\n        \"name\": \"Kucing Jambrong\",\n        \"slug\": \"kucing-jambrong\",\n        \"image\": \"https://picsum.photos/1300/1200\",\n        \"creationAt\": \"2026-09-12T13:56:22.000Z\",\n        \"updatedAt\": \"2026-09-12T13:56:22.000Z\"\n    },\n    {\n        \"id\": 206,\n        \"name\": \"QA Automation with Postman\",\n        \"slug\": \"qa-automation-with-postman\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:01:05.000Z\",\n        \"updatedAt\": \"2026-09-12T14:01:05.000Z\"\n    },\n    {\n        \"id\": 207,\n        \"name\": \"Sanbercode 123\",\n        \"slug\": \"sanbercode-123\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:02:34.000Z\",\n        \"updatedAt\": \"2026-09-12T14:02:34.000Z\"\n    },\n    {\n        \"id\": 209,\n        \"name\": \"jemyka123\",\n        \"slug\": \"jemyka123\",\n        \"image\": \"https://placeimg.com/640/480/tech\",\n        \"creationAt\": \"2026-09-12T14:05:28.000Z\",\n        \"updatedAt\": \"2026-09-12T14:05:28.000Z\"\n    },\n    {\n        \"id\": 210,\n        \"name\": \"halo 123\",\n        \"slug\": \"halo-123\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:07:06.000Z\",\n        \"updatedAt\": \"2026-09-12T14:07:06.000Z\"\n    },\n    {\n        \"id\": 211,\n        \"name\": \"halo ini saya\",\n        \"slug\": \"halo-ini-saya\",\n        \"image\": \"https://placeimg.com/640/480/any\",\n        \"creationAt\": \"2026-09-12T14:23:58.000Z\",\n        \"updatedAt\": \"2026-09-12T14:23:58.000Z\"\n    }\n]"
+        }
+      ]
+    }
+  ]
+}
